@@ -1,0 +1,70 @@
+import { Injectable } from '@angular/core';
+import { Http, Headers, Request, RequestOptions, RequestMethod, Response } from '@angular/http';
+import { Observable } from 'rxjs/Observable';
+
+import 'rxjs/add/operator/map';
+import 'rxjs/add/operator/catch';
+import 'rxjs/add/observable/throw';
+
+import { environment } from '../environments/environment';
+import { AuthService } from './auth.service';
+
+@Injectable()
+export class ApiService {
+
+	private baseUrl = environment.apiUrl;
+
+	constructor(private http: Http, private auth: AuthService) { }
+
+	// create a wrapper function for getting contacts
+	get(url: string) {
+		return this.makeRequest(url, RequestMethod.Get);
+	}
+
+	// create a wrapper function for posting contacts
+	post(url: string, body: Object) {
+		return this.makeRequest(url, RequestMethod.Post, body);
+	}
+
+	put(url: string, body: Object) {
+		return this.makeRequest(url, RequestMethod.Put, body);
+	}
+
+	delete(url: string, body: Object) {
+		return this.makeRequest(url, RequestMethod.Delete);
+	}
+
+	// define a request function
+	makeRequest(url: string, method: RequestMethod, body?: Object) {
+		const headers = new Headers();
+		headers.append('Content-Type', 'application/json');
+		headers.append('Authorization', `Bearer ${this.auth.getToken()}`);
+
+		const requestOptions = new RequestOptions({
+			url: `${this.baseUrl}/${url}`,
+			method,
+			headers,
+		});
+
+		if (body) {
+			requestOptions.body = body;
+		}
+
+		const request = new Request(requestOptions);
+
+		return this.http.request(request).map((res: Response) => res.json()).catch((res: Response) => this.onRequestError(res));
+	}
+
+	onRequestError(res: Response) {
+		let statusCode = res.status;
+		let body = res.json();
+
+		let error = {
+			statusCode,
+			error: body.error
+		}
+
+		return Observable.throw(error);
+	}
+
+}
