@@ -13,18 +13,20 @@ const todoSchema = mongoose.Schema({
     },
     completed: {
         type: Boolean,
-		required: true,
 		default: false
 	},
 	createdOn: {
 		type: String,
 		required: false,
-		default: new Date.toISOString()
+		default: new Date().toISOString()
 	},
 	createdBy: {
-		type: mongoose.Schema.Types.ObjectId,
+		type: String,
 		required: true,
-		ref: 'User' // use this to connect the productId from the Product doc
+	},
+	modifiedOn: {
+		type: String,
+		required: false,
 	},
 });
 
