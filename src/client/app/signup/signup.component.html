@@ -1,24 +1,18 @@
 <div class="container">
 	<div class="row mt-5">
 		<div class="col-sm-4 mt-5">
-			<form class="was- validated" #signUpForm="ngForm" (submit)="registerUser(signUpForm)">
-				<div class="form-group">
+			<form class="" #signUpForm="ngForm" (submit)="registerUser(signUpForm)">
+				<div class="form-group was- validated">
 					<label>Username:</label>
-					<input type="text" class="form-control" placeholder="username" name="username" required ngModel>
-					<!-- <div class="valid-feedback">Valid.</div>
-					<div class="invalid-feedback">Please fill out this field.</div> -->
+					<input type="text" class="form-control" placeholder="username" name="username" minlength="4" required ngModel>
 				</div>
-				<div class="form-group">
+				<div class="form-group was- validated">
 					<label>Email:</label>
-					<input type="text" class="form-control" placeholder="you@example.com" name="email" required ngModel>
-					<!-- <div class="valid-feedback">Valid.</div>
-					<div class="invalid-feedback">Please fill out this field.</div> -->
+					<input type="text" class="form-control" placeholder="you@example.com" id="email" name="email" minlength="5" required ngModel>
 				</div>
-				<div class="form-group">
+				<div class="form-group was- validated">
 					<label>Password:</label>
 					<input type="password" class="form-control" placeholder="Enter password" name="password" required ngModel>
-					<!-- <div class="valid-feedback">Valid.</div>
-					<div class="invalid-feedback">Please fill out this field.</div> -->
 				</div>
 				<p class="mt-1">
 					Already have an account? <a [routerLink]="['/login']">Login</a>

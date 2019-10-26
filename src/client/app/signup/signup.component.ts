@@ -12,6 +12,7 @@ import { AuthService } from '../../services/auth.service';
 })
 export class SignupComponent implements OnInit {
 
+	// inject dependencies in the constructor
 	constructor(private api: ApiService, private auth: AuthService, private router: Router) { }
 
 	ngOnInit() {
@@ -29,12 +30,10 @@ export class SignupComponent implements OnInit {
 			password: values.password
 		}
 
-		console.log(payload);
-
-		this.api.post('users/login', payload).subscribe((data) => {
-			console.log(data);
-			this.auth.setUserDetails(data.token, data.email);
-			this.router.navigate(['/home']);
+		this.api.post('users/signup', payload).subscribe((data) => {
+			// this.auth.setUserDetails(data.token, data.email);
+			form.reset();
+			this.router.navigate(['/login']);
 		});
 	}
 

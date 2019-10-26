@@ -42,7 +42,7 @@ exports.createTodo = async (req, res, next) => {
 		description: req.body.description,
 		completed: req.body.completed,
 		createdBy: req.headers['x-current-user'],
-		createdOn: new Date().toISOString()
+		createdOn: new Date().toISOString(),
     });
 
     try {
@@ -108,11 +108,16 @@ exports.getTodo = async (req, res, next) => {
 
 // update a todo
 exports.updateTodo = async (req, res, next) => {
-    const id = req.params.todoId;
-    let updateOps = {};
+	let id = req.params.todoId;
+	let updateOps = {};
+
+	if (req.body.todoId) {
+		id = req.body.todoId;
+	} else {
+		id = req.params.todoId;
+	}
 
     for (const ops of Object.keys(req.body)) {
-        // console.log(ops);
         updateOps[ops] = req.body[ops];
     }
 

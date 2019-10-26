@@ -31,12 +31,13 @@ export class ApiService {
 	}
 
 	delete(url: string, body: Object) {
-		return this.makeRequest(url, RequestMethod.Delete);
+		return this.makeRequest(url, RequestMethod.Delete, body);
 	}
 
 	// define a request function
 	makeRequest(url: string, method: RequestMethod, body?: Object) {
 		const headers = new Headers();
+
 		headers.append('Content-Type', 'application/json');
 		headers.append('Authorization', `Bearer ${this.auth.getUserDetails().token}`);
 		headers.append('X-Current-User', `${this.auth.getUserDetails().email}`);

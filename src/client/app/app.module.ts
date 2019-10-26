@@ -15,6 +15,7 @@ import { TodoItemComponent } from './todo-item/todo-item.component';
 import { LostComponent } from './lost/lost.component';
 import { AddTodoComponent } from './add-todo/add-todo.component';
 import { SignupComponent } from './signup/signup.component';
+import { EditTodoComponent } from './edit-todo/edit-todo.component';
 
 @NgModule({
 	declarations: [
@@ -25,7 +26,8 @@ import { SignupComponent } from './signup/signup.component';
 		TodoItemComponent,
 		LostComponent,
 		AddTodoComponent,
-		SignupComponent
+		SignupComponent,
+		EditTodoComponent
 	],
 	imports: [
 		BrowserModule,

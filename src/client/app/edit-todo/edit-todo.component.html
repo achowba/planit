@@ -1,0 +1,21 @@
+<div class="container">
+		<div class="row mt-5">
+			<div class="col-sm-12">
+				<form class="form-row" #updateTodoForm="ngForm" (submit)="updateTodo(updateTodoForm)">
+					<div class="col-sm-4 mr-3">
+						<div class="was- validated">
+							<label>Title:</label>
+							<input type="text" class="form-control" placeholder="Groceries" name="title" minlength="4" required ngModel>
+						</div>
+					</div>
+					<div class="col-sm-4 mr-3">
+						<div class=" was- validated">
+							<label>Description:</label>
+							<input type="text" class="form-control" placeholder="Get Milk" name="description" minlength="4" required ngModel>
+						</div>
+					</div>
+					<button type="submit" class="btn btn-info btn-update-todo">Update Todo</button>
+				</form>
+			</div>
+		</div>
+	</div>
