@@ -4,14 +4,14 @@
 				<form class="form-row" #updateTodoForm="ngForm" (submit)="updateTodo(updateTodoForm)">
 					<div class="col-sm-4 mr-3">
 						<div class="was- validated">
-							<label>Title:</label>
-							<input type="text" class="form-control" placeholder="Groceries" name="title" minlength="4" required ngModel>
+							<label>Todo Ti</label>
+							<input type="text" class="form-control" placeholder="Groceries" name="title" value="" minlength="4" required [(ngModel)]="todo.title">
 						</div>
 					</div>
 					<div class="col-sm-4 mr-3">
 						<div class=" was- validated">
 							<label>Description:</label>
-							<input type="text" class="form-control" placeholder="Get Milk" name="description" minlength="4" required ngModel>
+							<input type="text" class="form-control" placeholder="Get Milk" name="description" minlength="4" required [(ngModel)]="todo.description">
 						</div>
 					</div>
 					<button type="submit" class="btn btn-info btn-update-todo">Update Todo</button>

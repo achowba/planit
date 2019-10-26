@@ -26,12 +26,20 @@ export class ApiService {
 		return this.makeRequest(url, RequestMethod.Post, body);
 	}
 
+	// create a wrapper function for updating data
 	put(url: string, body: Object) {
 		return this.makeRequest(url, RequestMethod.Put, body);
 	}
 
-	delete(url: string, body: Object) {
-		return this.makeRequest(url, RequestMethod.Delete, body);
+	// create a wrapper function for deleting data
+	/* delete(url: string, body: Object) {
+	return this.makeRequest(url, RequestMethod.Delete, body); */
+	delete(url: string) {
+		return this.makeRequest(url, RequestMethod.Delete);
+	}
+
+	patch(url: string, body: object) {
+		return this.makeRequest(url, RequestMethod.Patch, body);
 	}
 
 	// define a request function

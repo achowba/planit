@@ -1,10 +1,11 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 
 import { ApiService } from '../../services/api.service';
 import { AuthService } from '../../services/auth.service';
 
 import { Todo } from './../../models/todo.model';
+import { NgForm } from '@angular/forms';
 
 @Component({
 	selector: 'app-edit-todo',
@@ -14,20 +15,34 @@ import { Todo } from './../../models/todo.model';
 export class EditTodoComponent implements OnInit {
 
 	todoId:string
-	todos: Todo[];
+	todo;
 
-	constructor(private api: ApiService, private auth: AuthService, private route: ActivatedRoute) {}
+	constructor(private api: ApiService, private auth: AuthService, private route: ActivatedRoute, private router: Router) {}
 
 	ngOnInit() {
 		if (this.auth.isLoggedIn()) {
 			this.todoId = this.route.snapshot.paramMap.get('id');
-			console.log(this.todoId);
 
 			this.api.get(`todos/${this.todoId}`).subscribe((data) => {
-				this.todos = data.todos;
-				console.log(data.todo);
+				this.todo = data.todo;
+				console.log(this.todo);
+				return this.todo
 			});
 		}
+	}
+
+	updateTodo(form: NgForm) {
+		const values = form.value;
+
+		const payload = {
+			title: values.title,
+			description: values.description
+		}
+
+		this.api.patch(`todos/${this.todoId}`, payload).subscribe((data) => {
+			form.reset();
+			this.router.navigate(['/home']);
+		});
 	}
 
 }

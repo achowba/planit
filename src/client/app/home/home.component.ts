@@ -34,7 +34,7 @@ export class HomeComponent implements OnInit {
 			todoId,
 		}
 
-		this.api.delete(`todos/${todoId}`, payload).subscribe((data) => {
+		this.api.delete(`todos/${todoId}`).subscribe((data) => {
 			if (data.status === 'success') {
 				e.target.parentNode.parentNode.parentNode.style.display = 'none';
 				// this.router.navigate(['/home']);

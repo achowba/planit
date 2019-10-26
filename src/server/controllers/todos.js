@@ -77,7 +77,7 @@ exports.getTodo = async (req, res, next) => {
         let todo = await Todo.findOne({
 			_id: id,
 			createdBy: req.headers['x-current-user']
-		}).select('_id title description completed createdOn createdAt');
+		}).select('_id title description completed createdOn createdBy modifiedOn');
 
         if (!todo) {
             return res.status(404).json({
@@ -87,15 +87,16 @@ exports.getTodo = async (req, res, next) => {
         }
 
         res.status(200).json({
-            status: "success",
-            todo: {
+			status: "success",
+			todo,
+            /* todo: {
 				_id: todo._id,
 				title: todo.title,
 				description: todo.description,
 				completed: todo.completed,
 				createdOn: todo.createdOn,
 				createdBy: todo.createdBy,
-            }
+            } */
         });
 
     } catch (err) {
@@ -111,11 +112,11 @@ exports.updateTodo = async (req, res, next) => {
 	let id = req.params.todoId;
 	let updateOps = {};
 
-	if (req.body.todoId) {
+	/* if (req.body.todoId) {
 		id = req.body.todoId;
 	} else {
 		id = req.params.todoId;
-	}
+	} */
 
     for (const ops of Object.keys(req.body)) {
         updateOps[ops] = req.body[ops];
@@ -162,12 +163,13 @@ exports.updateTodo = async (req, res, next) => {
 
 // delete a todo
 exports.deleteTodo = async (req, res, next) => {
-    let id = '';
-    if (req.body.todoId) {
+	let id = req.params.todoId;
+
+	/* if (req.body.todoId) {
         id = req.body.todoId;
     } else {
         id = req.params.todoId;
-    }
+    } */
 
     try {
 
