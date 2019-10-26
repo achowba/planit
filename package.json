@@ -2,6 +2,10 @@
 	"name": "ng-planit",
 	"version": "0.0.0",
 	"license": "MIT",
+	"engines": {
+		"node": "10.16.0",
+		"npm": "6.9.0"
+	},
 	"scripts": {
 		"ng": "ng",
 		"build": "ng build --prod",
