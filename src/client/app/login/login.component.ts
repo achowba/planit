@@ -31,8 +31,8 @@ export class LoginComponent implements OnInit {
 		}
 
         this.api.post('users/login', payload).subscribe((data) => {
-			form.reset();
             this.auth.setUserDetails(data.token, data.email, data.username);
+			form.reset();
             this.router.navigate(['/home']);
         });
     }

@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, HostBinding } from '@angular/core';
+import { Component, OnInit, Input, HostBinding, ElementRef } from '@angular/core';
 
 import { Router } from '@angular/router';
 
@@ -15,15 +15,14 @@ import { Todo } from './../../models/todo.model';
 
 export class HomeComponent implements OnInit {
 
-	// @Input() todo: Todo; //
+	@Input() todo: Todo; //
 
 	todos: Todo[];
-	constructor(private api: ApiService, private auth: AuthService, private router: Router) { }
+	constructor(private api: ApiService, private auth: AuthService, private router: Router, private elRef: ElementRef) { }
 
 	ngOnInit() {
 		if (this.auth.isLoggedIn()) {
 			this.api.get('todos').subscribe((data) => {
-
 				this.todos = data.todos;
 			});
 		}
@@ -37,7 +36,18 @@ export class HomeComponent implements OnInit {
 		this.api.delete(`todos/${todoId}`).subscribe((data) => {
 			if (data.status === 'success') {
 				e.target.parentNode.parentNode.parentNode.style.display = 'none';
-				// this.router.navigate(['/home']);
+			}
+		});
+	}
+
+	completeTodo(e, todoId) {
+		let payload = {
+			completed: true
+		}
+
+		this.api.patch(`todos/${todoId}`, payload).subscribe((data) => {
+			if (data.status === 'success') {
+				e.target.disabled = true;
 			}
 		});
 	}

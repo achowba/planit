@@ -23,7 +23,7 @@
 				<td>{{todo.modifiedOn ? displayTime(todo.modifiedOn) : displayTime(todo.createdOn)}}</td>
 				<td>
 					<div class="custom-control custom-checkbox mb-3">
-						<input type="checkbox" class="custom-control-input" id="customCheck-{{todo._id}}" name="example1" [checked]="todo.completed">
+						<input type="checkbox" class="custom-control-input" id="customCheck-{{todo._id}}" name="example1" (click)="completeTodo($event, todo._id)" [checked]="todo.completed" [disabled]="todo.completed">
 						<label class="custom-control-label" for="customCheck-{{todo._id}}"></label>
 						<!-- <label class="custom-control-label" for="customCheck-{{todo._id}}">{{todo.completed ? 'Completed' : 'InCompleted'}}</label> -->
 					</div>
