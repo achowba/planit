@@ -12,6 +12,8 @@ import { AuthGuard } from '../services/auth.guard';
 import { HomeComponent } from './home/home.component';
 import { NavComponent } from './nav/nav.component';
 import { TodoItemComponent } from './todo-item/todo-item.component';
+import { LostComponent } from './lost/lost.component';
+import { AddTodoComponent } from './add-todo/add-todo.component';
 
 @NgModule({
 	declarations: [
@@ -19,7 +21,9 @@ import { TodoItemComponent } from './todo-item/todo-item.component';
 		LoginComponent,
 		HomeComponent,
 		NavComponent,
-		TodoItemComponent
+		TodoItemComponent,
+		LostComponent,
+		AddTodoComponent
 	],
 	imports: [
 		BrowserModule,
