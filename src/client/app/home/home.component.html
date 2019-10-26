@@ -16,11 +16,11 @@
 				<td>
 					<a href=""><i class="material-icons">edit</i></a>
 				</td>
-				<td>Doe</td>
-				<td>john@example.com</td>
-				<td>john@example.com</td>
-				<td>john@example.com</td>
-				<td>john@example.com</td>
+				<td>{{todo.title}}</td>
+				<td>{{todo.description}}</td>
+				<td>{{todo.createdBy}}</td>
+				<td>{{todo.createdOn}}</td>
+				<td>{{todo.modifiedOn ? todo.modifiedOn : todo.createdOn}}</td>
 			</tr>
 		</tbody>
 	</table>

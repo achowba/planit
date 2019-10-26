@@ -1,13 +1,27 @@
-<div class="login-container">
-  <form class="ui big form" #loginForm="ngForm" (submit)="onSubmit(loginForm)">
-    <div class="field">
-      <label for="">Username</label>
-      <input type="text" name="username" placeholder="Username" ngModel>
-    </div>
-    <div class="field">
-      <label for="">Password</label>
-      <input type="password" name="password" placeholder="Password" ngModel>
-    </div>
-    <button type="submit" class="ui primary button float right floated">Login</button>
-  </form>
+<div class="container">
+	<div class="row mt-5">
+		<div class="col-md-8">
+			<img src="../../assets/img/undraw_chore_list_iof3.png" width="100%" class="mx-auto d-block mb-5">
+		</div>
+		<div class="col-md-4 mt-5">
+			<form class="was- validated" #loginForm="ngForm" (submit)="loginUser(loginForm)">
+				<div class="form-group">
+					<label>Email:</label>
+					<input type="text" class="form-control" placeholder="you@example.com" name="email" required ngModel>
+					<!-- <div class="valid-feedback">Valid.</div>
+					<div class="invalid-feedback">Please fill out this field.</div> -->
+				</div>
+				<div class="form-group">
+					<label>Password:</label>
+					<input type="password" class="form-control" placeholder="Enter Password" name="password" required ngModel>
+					<!-- <div class="valid-feedback">Valid.</div>
+					<div class="invalid-feedback">Please fill out this field.</div> -->
+				</div>
+				<p class="mt-1">
+					Don't have an account? <a [routerLink]="['/signup']">Sign Up</a>
+				</p>
+				<button type="submit" class="btn btn-info float-right">Login</button>
+			</form>
+		</div>
+	</div>
 </div>

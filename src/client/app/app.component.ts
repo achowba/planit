@@ -14,8 +14,5 @@ export class AppComponent {
 	constructor (public api: ApiService) {}
 
 	ngOnInit() {
-		this.api.get('todos').subscribe(data => {
-			console.log(data);
-		})
 	}
 }

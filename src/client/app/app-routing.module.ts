@@ -7,6 +7,7 @@ import { LoginComponent } from './login/login.component';
 import { HomeComponent } from './home/home.component';
 import { AddTodoComponent } from './add-todo/add-todo.component';
 import { LostComponent } from './lost/lost.component';
+import { SignupComponent } from './signup/signup.component';
 
 const routes: Routes = [
 	{
@@ -17,15 +18,20 @@ const routes: Routes = [
 	{
 		path: 'login',
 		component: LoginComponent,
-		canActivate: [AuthGuard]
+	},
+	{
+		path: 'signup',
+		component: SignupComponent,
 	},
 	{
 		path: 'home',
 		component: HomeComponent,
+		canActivate: [AuthGuard] // auth guard to prevent access to pages iwthout logging in
 	},
 	{
 		path: 'new',
 		component: AddTodoComponent,
+		canActivate: [AuthGuard] // auth guard to prevent access to pages iwthout logging in
 	},
 	{
 		path: 'lost',

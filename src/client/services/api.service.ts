@@ -38,7 +38,8 @@ export class ApiService {
 	makeRequest(url: string, method: RequestMethod, body?: Object) {
 		const headers = new Headers();
 		headers.append('Content-Type', 'application/json');
-		headers.append('Authorization', `Bearer ${this.auth.getToken()}`);
+		headers.append('Authorization', `Bearer ${this.auth.getUserDetails().token}`);
+		headers.append('X-Current-User', `${this.auth.getUserDetails().email}`);
 
 		const requestOptions = new RequestOptions({
 			url: `${this.baseUrl}/${url}`,

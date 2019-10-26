@@ -61,15 +61,18 @@ exports.loginUser = async (req, res, next) => {
                 status: "error",
                 message: "Authentication Failed."
             });
-        }
+		}
 
-        res.status(200).json({
-            status: "success",
-            message: "Authentication Successful.",
+        return res.status(200).json({
+			status: "success",
+			message: "Authentication Successful.",
+			username: user[0].username,
+			email: user[0].email,
             token,
         });
 
     } catch (err) {
+		console.log(err);
         res.status(400).send({
             status: "error",
             err: err.message,

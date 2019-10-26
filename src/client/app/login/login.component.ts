@@ -17,21 +17,24 @@ export class LoginComponent implements OnInit {
 
     ngOnInit() {
         if (this.auth.isLoggedIn()) {
-            this.router.navigate(['/contacts']);
+            this.router.navigate(['/home']);
         }
     }
 
-    onSubmit(form: NgForm) {
+    loginUser(form: NgForm) {
         const values = form.value;
 
         const payload = {
-            username: values.username,
+            email: values.email,
             password: values.password
-        }
+		}
 
-        this.api.post('authenticate', payload).subscribe((data) => {
-            this.auth.setToken(data.token);
-            this.router.navigate(['/contacts']);
+		console.log(payload);
+
+        this.api.post('users/login', payload).subscribe((data) => {
+			console.log(data);
+            this.auth.setUserDetails(data.token, data.email, data.username);
+            this.router.navigate(['/home']);
         });
     }
 

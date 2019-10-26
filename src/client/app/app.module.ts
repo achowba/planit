@@ -14,6 +14,7 @@ import { NavComponent } from './nav/nav.component';
 import { TodoItemComponent } from './todo-item/todo-item.component';
 import { LostComponent } from './lost/lost.component';
 import { AddTodoComponent } from './add-todo/add-todo.component';
+import { SignupComponent } from './signup/signup.component';
 
 @NgModule({
 	declarations: [
@@ -23,7 +24,8 @@ import { AddTodoComponent } from './add-todo/add-todo.component';
 		NavComponent,
 		TodoItemComponent,
 		LostComponent,
-		AddTodoComponent
+		AddTodoComponent,
+		SignupComponent
 	],
 	imports: [
 		BrowserModule,
