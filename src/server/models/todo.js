@@ -27,6 +27,7 @@ const todoSchema = mongoose.Schema({
 	modifiedOn: {
 		type: String,
 		required: false,
+		default: null
 	},
 });
 

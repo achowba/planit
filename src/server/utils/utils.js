@@ -9,6 +9,19 @@ function generateQueryId() {
 	return result;
 }
 
+// function checkCurrentUser (req, res, next) {
+module.exports = (req, res, next) => {
+	console.log(req)
+	// console.log(req.headers['x-current-user'])
+	if (!req.headers['x-current-user']) {
+		return res.status(401).json({
+			message: 'User Email Not Provided'
+		});
+	}
+	next();
+}
+
 module.exports = {
-	generateQueryId
+	generateQueryId,
+	checkCurrentUser
 }

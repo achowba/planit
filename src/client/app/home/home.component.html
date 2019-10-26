@@ -1,0 +1,28 @@
+<app-nav></app-nav>
+<div class="container-fluid">
+	<!-- <h2>Todos List</h2> -->
+	<table class="table mt-5">
+		<thead class="thead-light">
+			<tr>
+				<th>Edit</th>
+				<th>Title</th>
+				<th>Description</th>
+				<th>Created By</th>
+				<th>Created On</th>
+				<th>Last Modified On</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr *ngFor="let todo of todos">
+				<td>
+					<a href=""><i class="material-icons">edit</i></a>
+				</td>
+				<td>Doe</td>
+				<td>john@example.com</td>
+				<td>john@example.com</td>
+				<td>john@example.com</td>
+				<td>john@example.com</td>
+			</tr>
+		</tbody>
+	</table>
+</div>

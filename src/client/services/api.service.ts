@@ -16,12 +16,12 @@ export class ApiService {
 
 	constructor(private http: Http, private auth: AuthService) { }
 
-	// create a wrapper function for getting contacts
+	// create a wrapper function for getting data
 	get(url: string) {
 		return this.makeRequest(url, RequestMethod.Get);
 	}
 
-	// create a wrapper function for posting contacts
+	// create a wrapper function for posting data
 	post(url: string, body: Object) {
 		return this.makeRequest(url, RequestMethod.Post, body);
 	}

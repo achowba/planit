@@ -4,25 +4,25 @@ import { Router } from '@angular/router';
 @Injectable()
 export class AuthService {
 
-  storageKey: string = 'contact-manager-token';
+	storageKey: string = 'user-token';
 
-  constructor(private router: Router) { }
+	constructor(private router: Router) { }
 
-  setToken(token: string) {
-    localStorage.setItem(this.storageKey, token);
-  }
+	setToken(token: string) {
+		localStorage.setItem(this.storageKey, token);
+	}
 
-  getToken() {
-    return localStorage.getItem(this.storageKey);
-  }
+	getToken() {
+		return localStorage.getItem(this.storageKey);
+	}
 
-  isLoggedIn() {
-    return this.getToken() !== null;
-  }
+	isLoggedIn() {
+		return this.getToken() !== null;
+	}
 
-  logout() {
-    localStorage.removeItem(this.storageKey);
-    this.router.navigate(['/login']);
-  }
+	logout() {
+		localStorage.removeItem(this.storageKey);
+		this.router.navigate(['/login']);
+	}
 
 }

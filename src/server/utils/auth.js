@@ -52,6 +52,13 @@ const checkAuth = (req, res, next) => {
 			});
 		}
 
+		if (!req.headers['x-current-user']) {
+			return res.status(401).json({
+				message: 'Authentication Failed',
+				errorMessage: 'User Email Not Provided'
+			});
+		}
+
 		const token = req.headers.authorization.split(' ')[1];
 		const decoded = jwt.verify(token, process.env.JWT_KEY); // verify and decode the token
 		req.userData = decoded;

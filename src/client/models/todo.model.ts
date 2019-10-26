@@ -1,6 +1,7 @@
-export interface Contact {
-  name: string;
-  address: string;
-  phone: string;
-  photoUrl: string;
+export interface Todo {
+	title: string,
+	description: string,
+	completed: string,
+	createdBy: string,
 }
+

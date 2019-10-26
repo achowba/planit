@@ -5,9 +5,10 @@ const Todo = require('./../models/todo');
 // get all todos
 exports.getAllTodos = async (req, res, next) => {
     try {
+
         let todos = await Todo.find({
 			createdBy: req.headers['x-current-user']
-		}).select('_id title description completed createdOn createdBy');
+		}).select('_id title description completed createdOn createdBy modifiedOn');
 
         if (!todos) {
             return res.status(404).json({
@@ -34,16 +35,18 @@ exports.getAllTodos = async (req, res, next) => {
 
 // post a new todo
 exports.createTodo = async (req, res, next) => {
-    const todo = new Todo({
-        _id: new mongoose.Types.ObjectId(),
+
+	const todo = new Todo({
+		_id: new mongoose.Types.ObjectId(),
 		title: req.body.title,
 		description: req.body.description,
 		completed: req.body.completed,
-		createdBy: req.body.createdBy,
+		createdBy: req.headers['x-current-user'],
 		createdOn: new Date().toISOString()
     });
 
     try {
+
         let createdTodo = await todo.save();
 
         res.status(201).json({
@@ -53,7 +56,8 @@ exports.createTodo = async (req, res, next) => {
 				description: createdTodo.description,
 				completed: createdTodo.completed,
 				createdBy: createdTodo.createdBy,
-				createdOn: createdTodo.createdOn
+				createdOn: createdTodo.createdOn,
+				modifiedOn: createdTodo.modifiedOn
             }
         });
 
@@ -67,10 +71,13 @@ exports.createTodo = async (req, res, next) => {
 
 // get a single todo
 exports.getTodo = async (req, res, next) => {
-    const id = req.params.todoId;
+	const id = req.params.todoId;
 
     try {
-        let todo = await Todo.findById(id).select('_id title description completed createdOn createdAt');
+        let todo = await Todo.findOne({
+			_id: id,
+			createdBy: req.headers['x-current-user']
+		}).select('_id title description completed createdOn createdAt');
 
         if (!todo) {
             return res.status(404).json({
@@ -81,7 +88,7 @@ exports.getTodo = async (req, res, next) => {
 
         res.status(200).json({
             status: "success",
-            todo:{
+            todo: {
 				_id: todo._id,
 				title: todo.title,
 				description: todo.description,
@@ -115,9 +122,11 @@ exports.updateTodo = async (req, res, next) => {
 	}
 
     try {
+
         let updatedTodo = await Todo.findOneAndUpdate(
             {
-                _id: id
+				_id: id,
+				createdBy: req.headers['x-current-user']
             }, {
                 $set: updateOps
             }, {
@@ -156,7 +165,11 @@ exports.deleteTodo = async (req, res, next) => {
     }
 
     try {
-        let deletedTodo = await Todo.findByIdAndDelete({_id: id});
+
+        let deletedTodo = await Todo.findByIdAndDelete({
+			_id: id,
+			createdBy: req.headers['x-current-user']
+		});
 
         if (!deletedTodo) {
             return res.status(404).json({
