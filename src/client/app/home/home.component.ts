@@ -24,7 +24,6 @@ export class HomeComponent implements OnInit {
 		if (this.auth.isLoggedIn()) {
 			this.api.get('todos').subscribe((data) => {
 				this.todos = data.todos;
-				console.log(this.todos);
 			});
 		}
     }

@@ -1,5 +1,21 @@
 /* You can add global styles to this file, and also import other style files */
+
+@import url('https://fonts.googleapis.com/css?family=Raleway:400,500,700&display=swap');
+
+html, body {
+	font-family: 'Raleway' !important;
+}
+
 .btn-disabled {
 	opacity: 0.4 !important;
 	cursor: not-allowed;
+}
+
+.active-link {
+	font-weight: 600 !important;
+	font-size: 1.1rem !important;
+}
+
+.active-link > a {
+	color: #097369 !important;
 }

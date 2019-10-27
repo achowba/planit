@@ -6,15 +6,18 @@
 
 	<div id="navbarNavDropdown" class="navbar-collapse collapse">
 		<ul class="navbar-nav mr-auto">
-			<li class="nav-item active">
+			<li class="nav-item" [class.active-link]="currentUrl == '/home'">
 				<a class="nav-link" [routerLink]="['/home']" *ngIf="auth.isLoggedIn()">Home<span class="sr-only">(current)</span></a>
 			</li>
 			<li class="nav-item">
-				<a class="nav-link" [routerLink]="['/login']" *ngIf="!auth.isLoggedIn()">Login</a>
+				<a class="nav-link" [routerLink]="['/login']" *ngIf="!auth.isLoggedIn() && currentUrl != '/login'">Login</a>
+			</li>
+			<li class="nav-item">
+				<a class="nav-link" [routerLink]="['/signup']" *ngIf="!auth.isLoggedIn() && currentUrl != '/signup'">Signup</a>
 			</li>
 		</ul>
 		<ul class="navbar-nav">
-			<li class="nav-item mr-4">
+			<li class="nav-item mr-4" [class.active-link]="currentUrl == '/new'">
 				<a class="nav-link" [routerLink]="['/new']" *ngIf="auth.isLoggedIn()">Add a New Todo</a>
 			</li>
 			<li class="nav-item dropdown" *ngIf="auth.isLoggedIn()">
