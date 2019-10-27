@@ -1,6 +1,6 @@
 <div class="container-fluid">
 	<h3 class="mt-4">Todos List</h3>
-	<table class="table table-hover mt-5">
+	<table class="table table-hover mt-5" *ngIf="todos.length != 0">
 		<thead class="thead-light">
 			<tr>
 				<th>Edit</th>
@@ -36,4 +36,12 @@
 			</tr>
 		</tbody>
 	</table>
+	<div class="" *ngIf="todos.length == 0">
+		<div class="col-sm-4 offset-4">
+			<img src="../../assets/img/undraw_blank_canvas_3rbb.png" width="100%" class="mx-auto d-block mb-5">
+		</div>
+		<div class="col-4 offset-4">
+			<p class="text-center text-danger mt-1">You don't have any todos. &nbsp;&nbsp;&nbsp;&nbsp;<a [routerLink]="['/new']" class="btn btn-primary">Add A New Todo</a></p>
+		</div>
+	</div>
 </div>

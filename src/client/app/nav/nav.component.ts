@@ -8,9 +8,15 @@ import { ApiService } from './../../services/api.service';
 	templateUrl: './nav.component.html',
 	styleUrls: ['./nav.component.scss']
 })
+
+interface User {
+	username: string,
+	email: string
+}
+
 export class NavComponent implements OnInit,  AfterContentChecked {
 
-	user: Object;
+	user: User;
 
 	constructor(public auth: AuthService, public api: ApiService) { }
 

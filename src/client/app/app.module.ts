@@ -17,6 +17,7 @@ import { LostComponent } from './lost/lost.component';
 import { AddTodoComponent } from './add-todo/add-todo.component';
 import { SignupComponent } from './signup/signup.component';
 import { EditTodoComponent } from './edit-todo/edit-todo.component';
+import { ToastComponent } from './toast/toast.component';
 
 @NgModule({
 	declarations: [
@@ -28,7 +29,8 @@ import { EditTodoComponent } from './edit-todo/edit-todo.component';
 		LostComponent,
 		AddTodoComponent,
 		SignupComponent,
-		EditTodoComponent
+		EditTodoComponent,
+		ToastComponent
 	],
 	imports: [
 		BrowserModule,

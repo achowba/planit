@@ -30,6 +30,8 @@ export class LoginComponent implements OnInit {
             password: values.password
 		}
 
+		console.log(payload);
+
         this.api.post('users/login', payload).subscribe((data) => {
             this.auth.setUserDetails(data.token, data.email, data.username);
 			form.reset();

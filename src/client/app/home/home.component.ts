@@ -17,13 +17,14 @@ export class HomeComponent implements OnInit {
 
 	@Input() todo: Todo; //
 
-	todos: Todo[];
+	todos: Todo[] = [];
 	constructor(private api: ApiService, private auth: AuthService, private router: Router, private elRef: ElementRef) { }
 
 	ngOnInit() {
 		if (this.auth.isLoggedIn()) {
 			this.api.get('todos').subscribe((data) => {
 				this.todos = data.todos;
+				console.log(this.todos);
 			});
 		}
     }

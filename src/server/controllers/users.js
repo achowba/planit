@@ -5,7 +5,8 @@ const { hashPassword, comparePassword, jwtUser } = require('./../utils/auth');
 
 // create a new user
 exports.createUser = async (req, res, next) => {
-    try {
+
+	try {
 		let hashedPassword = await hashPassword(req.body.password);
 		let existingUser = await User.find({
 			email: req.body.email
@@ -18,7 +19,7 @@ exports.createUser = async (req, res, next) => {
 			});
 		}
 
-        const user = new User ({
+        let user = new User ({
             _id: new mongoose.Types.ObjectId(),
             username: req.body.username,
             email: req.body.email,
@@ -41,22 +42,23 @@ exports.createUser = async (req, res, next) => {
 		console.log(err);
         res.status(400).send({
             status: "error",
-            err: err.message,
+            err: "Failed to Create User.",
         });
     }
 }
 
 // authenticate/log user in
 exports.loginUser = async (req, res, next) => {
-    let email = req.body.email;
-    let password = req.body.password;
 
-    try {
-        let user = await User.find({email,});
-        let userPassword = await comparePassword(password, user[0].password);
-        let token = jwtUser(user[0].email, user[0].password);
+	let email = req.body.email;
+	let password = req.body.password;
 
-        if (!user || user.length < 1 || !userPassword) {
+	try {
+		let user = await User.find({email,});
+		let userPassword = await comparePassword(password, user[0].password);
+		let token = jwtUser(user[0].email, user[0].password);
+
+        if (!user || user.length == 0 || !userPassword) {
             return res.status(401).json({
                 status: "error",
                 message: "Authentication Failed."
@@ -73,9 +75,9 @@ exports.loginUser = async (req, res, next) => {
 
     } catch (err) {
 		console.log(err);
-        res.status(400).send({
-            status: "error",
-            err: err.message,
+		return res.status(400).send({
+			status: "error",
+			err: "Authentication Failed.",
         });
     }
 }

@@ -28,7 +28,7 @@ exports.getAllTodos = async (req, res, next) => {
     } catch (err) {
 		console.log(err);
         res.status(500).json({
-            err: err.message
+            err: "Failed to Get Todos"
         });
     }
 }
