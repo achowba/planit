@@ -1,6 +1,8 @@
-import { Component } from '@angular/core';
+import { Component, enableProdMode } from '@angular/core';
 
 import { ApiService } from '../services/api.service';
+
+enableProdMode();
 
 @Component({
 	selector: 'app-root',
