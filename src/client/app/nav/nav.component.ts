@@ -3,16 +3,16 @@ import { Component, OnInit, AfterContentInit, AfterContentChecked, AfterViewInit
 import { AuthService } from './../../services/auth.service';
 import { ApiService } from './../../services/api.service';
 
+interface User {
+	username: string,
+	email: string
+}
+
 @Component({
 	selector: 'app-nav',
 	templateUrl: './nav.component.html',
 	styleUrls: ['./nav.component.scss']
 })
-
-interface User {
-	username: string,
-	email: string
-}
 
 export class NavComponent implements OnInit,  AfterContentChecked {
 
