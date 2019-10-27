@@ -26,7 +26,7 @@ export class HomeComponent implements OnInit {
 				this.todos = data.todos;
 			});
 		}
-	}
+    }
 
 	deleteTodo(e, todoId) {
 		let payload = {
@@ -62,5 +62,4 @@ export class HomeComponent implements OnInit {
 			return `${day} | ${time}`
 		}
 	}
-
 }

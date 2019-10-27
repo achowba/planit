@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, AfterContentInit, AfterContentChecked, AfterViewInit } from '@angular/core';
 
 import { AuthService } from './../../services/auth.service';
 import { ApiService } from './../../services/api.service';
@@ -8,7 +8,7 @@ import { ApiService } from './../../services/api.service';
 	templateUrl: './nav.component.html',
 	styleUrls: ['./nav.component.scss']
 })
-export class NavComponent implements OnInit {
+export class NavComponent implements OnInit,  AfterContentChecked {
 
 	user: Object;
 
@@ -20,10 +20,9 @@ export class NavComponent implements OnInit {
 		}
 	}
 
-	ngOnChanges() {
+	ngAfterContentChecked(){
 		if (this.auth.isLoggedIn()) {
 			this.user = this.auth.getUserDetails();
-			return this.user;
 		}
 	}
 
