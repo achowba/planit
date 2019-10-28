@@ -15,6 +15,7 @@
 		<tbody>
 			<tr *ngFor="let todo of todos">
 				<td>
+					<!-- target="blank" -->
 					<a routerLink="/todo/{{todo._id}}" *ngIf="!todo.completed"><i class="material-icons">edit</i></a>
 					<a routerLink="" *ngIf="todo.completed" class="btn-disabled"><i class="material-icons">edit</i></a>
 				</td>

@@ -4,7 +4,6 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { ApiService } from '../../services/api.service';
 import { AuthService } from '../../services/auth.service';
 
-import { Todo } from './../../models/todo.model';
 import { NgForm } from '@angular/forms';
 
 @Component({
@@ -15,7 +14,7 @@ import { NgForm } from '@angular/forms';
 export class EditTodoComponent implements OnInit {
 
 	todoId:string
-	todo;
+	todo:any = [];
 
 	constructor(private api: ApiService, private auth: AuthService, private route: ActivatedRoute, private router: Router) {}
 

@@ -4,6 +4,9 @@ import { FormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
 import { HashLocationStrategy, LocationStrategy } from '@angular/common';
 
+import { ToastrModule } from 'ngx-toastr';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { ApiService } from '../services/api.service';
@@ -17,7 +20,6 @@ import { LostComponent } from './lost/lost.component';
 import { AddTodoComponent } from './add-todo/add-todo.component';
 import { SignupComponent } from './signup/signup.component';
 import { EditTodoComponent } from './edit-todo/edit-todo.component';
-import { ToastComponent } from './toast/toast.component';
 
 @NgModule({
 	declarations: [
@@ -30,15 +32,22 @@ import { ToastComponent } from './toast/toast.component';
 		AddTodoComponent,
 		SignupComponent,
 		EditTodoComponent,
-		ToastComponent
 	],
 	imports: [
 		BrowserModule,
 		FormsModule,
 		HttpModule,
-		AppRoutingModule
+		AppRoutingModule,
+
+		ToastrModule.forRoot({
+			closeButton: true
+		}),
+		BrowserAnimationsModule
 	],
-	providers: [ApiService, AuthService, AuthGuard, {provide: LocationStrategy, useClass: HashLocationStrategy}],
+	providers: [ApiService, AuthService, AuthGuard, {
+		provide: LocationStrategy,
+		useClass: HashLocationStrategy
+	}],
 	bootstrap: [AppComponent]
 })
 export class AppModule { }

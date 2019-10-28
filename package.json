@@ -22,6 +22,7 @@
 	},
 	"private": true,
 	"dependencies": {
+		"@angular/animations": "^4.3.3",
 		"@angular/cli": "^1.0.4",
 		"@angular/common": "^4.0.0",
 		"@angular/compiler": "^4.0.0",
@@ -42,11 +43,12 @@
 		"joi": "^14.3.1",
 		"jsonwebtoken": "^7.4.3",
 		"mongoose": "^5.7.7",
+		"ngx-toastr": "^6.5.0",
 		"npm-run-all": "^4.0.2",
 		"rxjs": "^5.1.0",
 		"supertest": "^4.0.2",
-		"zone.js": "^0.8.4",
-		"typescript": "~2.2.0"
+		"typescript": "~2.2.0",
+		"zone.js": "^0.8.4"
 	},
 	"devDependencies": {
 		"@types/jasmine": "2.5.38",

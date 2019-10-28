@@ -37,7 +37,8 @@ const routes: Routes = [
 	},
 	{
 		path: 'todo/:id',
-		component: EditTodoComponent
+		component: EditTodoComponent,
+		canActivate: [AuthGuard] // auth guard to prevent access to pages without logging in
 	},
 	{
 		path: 'lost',

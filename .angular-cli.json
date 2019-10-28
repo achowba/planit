@@ -17,7 +17,9 @@
 			"prefix": "app",
 			"styles": [
 				"styles.scss",
-				"assets/css/bootstrap.min.css"
+				"assets/css/bootstrap.min.css",
+				"assets/css/toastr.css",
+				"assets/css/toastr-bs4-alert.scss"
 			],
 			"scripts": [],
 			"environmentSource": "environments/environment.ts",

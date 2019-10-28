@@ -5,6 +5,7 @@ import { NgForm } from '@angular/forms';
 
 import { ApiService } from '../../services/api.service';
 import { AuthService } from '../../services/auth.service';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
 	selector: 'app-add-todo',
@@ -14,7 +15,7 @@ import { AuthService } from '../../services/auth.service';
 export class AddTodoComponent implements OnInit {
 
 	// inject dependencies in the constructor
-	constructor(private api: ApiService, private auth: AuthService, private router: Router) { }
+	constructor(private api: ApiService, private auth: AuthService, private toastr: ToastrService) { }
 
 	id: string;
 
@@ -30,7 +31,12 @@ export class AddTodoComponent implements OnInit {
 		}
 
 		this.api.post('todos', payload).subscribe((data) => {
-			form.reset();
+			if (data.status === 'success') {
+				form.reset();
+				this.toastr.success("Todo Added Successfully");
+			} else {
+				this.toastr.error("Failed to Add Todo.")
+			}
 			// this.router.navigate(['/home']);
 		});
 	}

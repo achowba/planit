@@ -4,6 +4,7 @@ import { NgForm } from '@angular/forms';
 
 import { ApiService } from '../../services/api.service';
 import { AuthService } from '../../services/auth.service';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
     selector: 'app-login',
@@ -13,8 +14,10 @@ import { AuthService } from '../../services/auth.service';
 
 export class LoginComponent implements OnInit {
 
+	username: string = '';
+
 	// inject dependencies in the constructor
-    constructor(private api: ApiService, private auth: AuthService, private router: Router) { }
+    constructor(private api: ApiService, private auth: AuthService, private router: Router, private toastr: ToastrService) { }
 
     ngOnInit() {
         if (this.auth.isLoggedIn()) {
@@ -33,9 +36,12 @@ export class LoginComponent implements OnInit {
 		console.log(payload);
 
         this.api.post('users/login', payload).subscribe((data) => {
-            this.auth.setUserDetails(data.token, data.email, data.username);
 			form.reset();
-            this.router.navigate(['/home']);
+
+			this.auth.setUserDetails(data.token, data.email, data.username);
+			this.username = this.auth.getUserDetails().username;
+			this.router.navigate(['/home']);
+			this.toastr.info(`Hello, ${this.username}`);
         });
     }
 

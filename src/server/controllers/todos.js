@@ -112,14 +112,8 @@ exports.updateTodo = async (req, res, next) => {
 	let id = req.params.todoId;
 	let updateOps = {};
 
-	/* if (req.body.todoId) {
-		id = req.body.todoId;
-	} else {
-		id = req.params.todoId;
-	} */
-
     for (const ops of Object.keys(req.body)) {
-        updateOps[ops] = req.body[ops];
+		updateOps[ops] = req.body[ops];
     }
 
 	updateOps = {
