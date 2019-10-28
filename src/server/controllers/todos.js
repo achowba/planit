@@ -23,11 +23,10 @@ exports.getAllTodos = async (req, res, next) => {
 			todos,
         }
 
-		res.status(200).json(response);
+		return res.status(200).json(response);
 
     } catch (err) {
-		console.log(err);
-        res.status(500).json({
+		return res.status(500).json({
             err: "Failed to Get Todos"
         });
     }
@@ -49,7 +48,7 @@ exports.createTodo = async (req, res, next) => {
 
         let createdTodo = await todo.save();
 
-        res.status(201).json({
+		return res.status(201).json({
             status: "success",
             newTodo: {
 				title: createdTodo.title,
@@ -62,7 +61,7 @@ exports.createTodo = async (req, res, next) => {
         });
 
     } catch (err) {
-        res.status(400).json({
+		return res.status(400).json({
             status: "error",
             err: err.message
         });
@@ -86,7 +85,7 @@ exports.getTodo = async (req, res, next) => {
             });
         }
 
-        res.status(200).json({
+		return res.status(200).json({
 			status: "success",
 			todo,
             /* todo: {
@@ -100,7 +99,7 @@ exports.getTodo = async (req, res, next) => {
         });
 
     } catch (err) {
-        res.status(500).send({
+		return res.status(500).send({
             status: "error",
             err: err.message
         });
@@ -134,7 +133,7 @@ exports.updateTodo = async (req, res, next) => {
 			}
         );
 
-        res.status(200).json({
+		return res.status(200).json({
 			status: "success",
             updatedTodo: {
 				_id: updatedTodo._id,
@@ -148,7 +147,7 @@ exports.updateTodo = async (req, res, next) => {
         });
 
     } catch (err) {
-        res.status(500).json({
+		return res.status(500).json({
             status: "error",
             err: err.message
         });
@@ -158,12 +157,6 @@ exports.updateTodo = async (req, res, next) => {
 // delete a todo
 exports.deleteTodo = async (req, res, next) => {
 	let id = req.params.todoId;
-
-	/* if (req.body.todoId) {
-        id = req.body.todoId;
-    } else {
-        id = req.params.todoId;
-    } */
 
     try {
 
@@ -179,7 +172,7 @@ exports.deleteTodo = async (req, res, next) => {
             });
         }
 
-        res.status(200).json({
+		return res.status(200).json({
             status: "success",
             deletedTodo: {
 				_id: deletedTodo._id,
@@ -192,9 +185,9 @@ exports.deleteTodo = async (req, res, next) => {
         });
 
     } catch (err) {
-        res.status(500).json({
+        return res.status(500).json({
             status: "error",
-            err: err.message
+            err: "Failed to Delete Todo"
         });
     }
 }

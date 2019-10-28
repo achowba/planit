@@ -33,9 +33,9 @@ export class AddTodoComponent implements OnInit {
 		this.api.post('todos', payload).subscribe((data) => {
 			if (data.status === 'success') {
 				form.reset();
-				this.toastr.success("Todo Added Successfully");
+				this.toastr.success("Todo Added Successfully", "Added");
 			} else {
-				this.toastr.error("Failed to Add Todo.")
+				this.toastr.error("Failed to Add Todo.", "An Error Occured")
 			}
 			// this.router.navigate(['/home']);
 		});

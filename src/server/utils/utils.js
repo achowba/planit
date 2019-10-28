@@ -5,14 +5,11 @@ function generateQueryId() {
 		result += process.env.QUERY_ID_CHARACTERS[Math.floor(Math.random() * process.env.QUERY_ID_CHARACTERS.length)];
 	}
 
-	console.log('The String is: ', result);
 	return result;
 }
 
 // function checkCurrentUser (req, res, next) {
 module.exports = (req, res, next) => {
-	console.log(req)
-	// console.log(req.headers['x-current-user'])
 	if (!req.headers['x-current-user']) {
 		return res.status(401).json({
 			message: 'User Email Not Provided'

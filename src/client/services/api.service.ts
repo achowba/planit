@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Http, Headers, Request, RequestOptions, RequestMethod, Response } from '@angular/http';
 import { Observable } from 'rxjs/Observable';
+import { ToastrService } from 'ngx-toastr';
 
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/catch';
@@ -14,7 +15,7 @@ export class ApiService {
 
 	private baseUrl = environment.apiUrl;
 
-	constructor(private http: Http, private auth: AuthService) { }
+	constructor(private http: Http, private auth: AuthService, private toastr: ToastrService) { }
 
 	// create a wrapper function for getting data
 	get(url: string) {
@@ -32,8 +33,6 @@ export class ApiService {
 	}
 
 	// create a wrapper function for deleting data
-	/* delete(url: string, body: Object) {
-	return this.makeRequest(url, RequestMethod.Delete, body); */
 	delete(url: string) {
 		return this.makeRequest(url, RequestMethod.Delete);
 	}
@@ -65,6 +64,7 @@ export class ApiService {
 		return this.http.request(request).map((res: Response) => res.json()).catch((res: Response) => this.onRequestError(res));
 	}
 
+	// function to handle errors
 	onRequestError(res: Response) {
 		let statusCode = res.status;
 		let body = res.json();
@@ -74,6 +74,7 @@ export class ApiService {
 			error: body.error
 		}
 
+		this.toastr.error("Failed to Complete Action.", "An Error Occured.");
 		return Observable.throw(error);
 	}
 

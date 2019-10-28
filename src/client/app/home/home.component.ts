@@ -25,10 +25,8 @@ export class HomeComponent implements OnInit {
 
 	ngOnInit() {
 		if (this.auth.isLoggedIn()) {
-			let username = this.auth.getUserDetails().username;
 			this.api.get('todos').subscribe((data) => {
 				this.todos = data.todos;
-				// this.toastr.info(`Hello, ${username}`);
 			});
 		}
 	}
@@ -38,9 +36,9 @@ export class HomeComponent implements OnInit {
 			if (data.status === 'success') {
 				e.target.parentNode.parentNode.parentNode.style.display = 'none';
 				this.todos = this.updateTodoArray(todoId, this.todos);
-				this.toastr.success("Todo Deleted Successfully");
+				this.toastr.success("Todo Deleted Successfully", "Deleted");
 			} else {
-				this.toastr.error("Failed to Delete Todo.")
+				this.toastr.error("Failed to Delete Todo.", "An Error Occured")
 			}
 		});
 	}
@@ -53,9 +51,9 @@ export class HomeComponent implements OnInit {
 		this.api.patch(`todos/${todoId}`, payload).subscribe((data) => {
 			if (data.status === 'success') {
 				e.target.disabled = true;
-				this.toastr.success("Todo Marked as Completed");
+				this.toastr.success("Todo Marked as Completed", "Updated");
 			} else {
-				this.toastr.error("Failed to Mark Todo as Completed.")
+				this.toastr.error("Failed to Mark Todo as Completed.", "An Error Occured.")
 			}
 		});
 	}

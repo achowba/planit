@@ -24,7 +24,6 @@ export class EditTodoComponent implements OnInit {
 
 			this.api.get(`todos/${this.todoId}`).subscribe((data) => {
 				this.todo = data.todo;
-				console.log(this.todo);
 				return this.todo
 			});
 		}

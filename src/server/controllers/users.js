@@ -39,7 +39,6 @@ exports.createUser = async (req, res, next) => {
         });
 
     } catch (err) {
-		console.log(err);
         res.status(400).send({
             status: "error",
             err: "Failed to Create User.",
@@ -74,7 +73,6 @@ exports.loginUser = async (req, res, next) => {
         });
 
     } catch (err) {
-		console.log(err);
 		return res.status(400).send({
 			status: "error",
 			err: "Authentication Failed.",

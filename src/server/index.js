@@ -10,7 +10,7 @@ server.listen((port), () => {
 	console.log(`App running on Port: ${port}`);
 }); */
 
-app.set( 'port', (process.env.PORT || 4000));
-app.listen( app.get( 'port' ), function() {
-	console.log( `Node server is running on Port: ${app.get('port')}`);
+app.set('port', (process.env.PORT || 4000));
+app.listen( app.get('port'), function() {
+	console.log( `Server is running on Port: ${app.get('port')}`);
 });
