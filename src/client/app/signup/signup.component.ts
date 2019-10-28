@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ɵConsole } from '@angular/core';
 import { Router } from '@angular/router';
 import { NgForm } from '@angular/forms';
 
@@ -32,6 +32,7 @@ export class SignupComponent implements OnInit {
 
 		this.api.post('users/signup', payload).subscribe((data) => {
 			// this.auth.setUserDetails(data.token, data.email);
+			console.log(data);
 			form.reset();
 			this.router.navigate(['/login']);
 		});

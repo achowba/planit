@@ -20,11 +20,4 @@ export class AppComponent {
 	ngOnInit() {
 	}
 
-	showToaster(){
-		this.toastr.success("Hello, I'm the toastr message.")
-		this.toastr.error("Hello, I'm the toastr message.")
-		this.toastr.warning("Hello, I'm the toastr message.")
-		this.toastr.info("Hello, I'm the toastr message.")
-	}
-
 }

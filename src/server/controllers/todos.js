@@ -13,7 +13,7 @@ exports.getAllTodos = async (req, res, next) => {
         if (!todos) {
             return res.status(404).json({
                 status: "error",
-                message: "No Todos Found",
+                error: "No Todos Found",
             });
 		}
 
@@ -27,7 +27,7 @@ exports.getAllTodos = async (req, res, next) => {
 
     } catch (err) {
 		return res.status(500).json({
-            err: "Failed to Get Todos"
+            error: "Failed to Get Todos"
         });
     }
 }
@@ -63,7 +63,7 @@ exports.createTodo = async (req, res, next) => {
     } catch (err) {
 		return res.status(400).json({
             status: "error",
-            err: err.message
+            error: "Failed to Create Todo"
         });
     }
 }
@@ -81,7 +81,7 @@ exports.getTodo = async (req, res, next) => {
         if (!todo) {
             return res.status(404).json({
                 status: "error",
-                message: "No valid entry found for provided ID",
+                error: "Todo Doesn't Exist",
             });
         }
 
@@ -101,7 +101,7 @@ exports.getTodo = async (req, res, next) => {
     } catch (err) {
 		return res.status(500).send({
             status: "error",
-            err: err.message
+            error: "Failed to Get Todo Details"
         });
     }
 }
@@ -149,7 +149,7 @@ exports.updateTodo = async (req, res, next) => {
     } catch (err) {
 		return res.status(500).json({
             status: "error",
-            err: err.message
+            error: "Failed to Update Todo"
         });
     }
 }
@@ -168,7 +168,7 @@ exports.deleteTodo = async (req, res, next) => {
         if (!deletedTodo) {
             return res.status(404).json({
                 status: "error",
-                message: "Todo Not Found",
+                error: "Todo Not Found",
             });
         }
 
@@ -187,7 +187,7 @@ exports.deleteTodo = async (req, res, next) => {
     } catch (err) {
         return res.status(500).json({
             status: "error",
-            err: "Failed to Delete Todo"
+            error: "Failed to Delete Todo"
         });
     }
 }

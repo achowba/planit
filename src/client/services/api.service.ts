@@ -74,7 +74,11 @@ export class ApiService {
 			error: body.error
 		}
 
-		this.toastr.error("Failed to Complete Action.", "An Error Occured.");
+		if (!body.error) {
+			this.toastr.error("Failed to Contact Server", "An Error Occured.");
+		} else {
+			this.toastr.error(`${body.error}`, "An Error Occured.");
+		}
 		return Observable.throw(error);
 	}
 

@@ -15,9 +15,8 @@
 		<tbody>
 			<tr *ngFor="let todo of todos">
 				<td>
-					<!-- target="blank" -->
-					<a routerLink="/todo/{{todo._id}}" *ngIf="!todo.completed"><i class="material-icons">edit</i></a>
-					<a routerLink="" *ngIf="todo.completed" class="btn-disabled"><i class="material-icons">edit</i></a>
+					<a routerLink="/todo/{{todo._id}}" title="Edit Todo" *ngIf="!todo.completed"><i class="material-icons">edit</i></a>
+					<a routerLink="" *ngIf="todo.completed" title="Todo is already Completed." class="btn-disabled"><i class="material-icons">edit</i></a>
 				</td>
 				<td>{{todo.title}}</td>
 				<td>{{todo.description}}</td>
@@ -25,14 +24,13 @@
 				<td>{{todo.modifiedOn ? displayTime(todo.modifiedOn) : displayTime(todo.createdOn)}}</td>
 				<td>
 					<div class="custom-control custom-checkbox mb-3">
-						<input type="checkbox" class="custom-control-input" id="customCheck-{{todo._id}}" name="example1" (click)="completeTodo($event, todo._id)" [checked]="todo.completed" [disabled]="todo.completed" [(ngModel)]="todo.completed">
+						<input type="checkbox" class="custom-control-input" id="customCheck-{{todo._id}}" name="completeTodo" (click)="completeTodo($event, todo._id)" [checked]="todo.completed" [disabled]="todo.completed" [(ngModel)]="todo.completed">
 						<label class="custom-control-label" for="customCheck-{{todo._id}}"></label>
-						<!-- <label class="custom-control-label" for="customCheck-{{todo._id}}">{{todo.completed ? 'Completed' : 'InCompleted'}}</label> -->
 					</div>
 				</td>
 				<td class="todo-item-{{todo._id}}">
-					<a class="btn-delete-todo" (click)="deleteTodo($event, todo._id)"  *ngIf="!todo.completed"><i class="material-icons">delete</i></a>
-					<a class="btn-disabled" *ngIf="todo.completed"><i class="material-icons">delete</i></a>
+					<a class="btn-delete-todo" title="Delete Todo" (click)="deleteTodo($event, todo._id)"  *ngIf="!todo.completed"><i class="material-icons">delete</i></a>
+					<a class="btn-disabled" title="Todo is already Completed." *ngIf="todo.completed"><i class="material-icons">delete</i></a>
 				</td>
 			</tr>
 		</tbody>

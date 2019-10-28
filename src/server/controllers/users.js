@@ -13,9 +13,9 @@ exports.createUser = async (req, res, next) => {
 		});
 
 		if (existingUser.length > 0) {
-			return res.status(400).json({
+			return res.status(401).json({
 				status: "error",
-				message: "Email Already Exists!"
+				error: "Email Already Exists!"
 			});
 		}
 
@@ -28,7 +28,7 @@ exports.createUser = async (req, res, next) => {
 
         let createdUser = await user.save();
 
-        res.status(201).send({
+		return res.status(201).send({
             status: "success",
             createdUser: {
                 _id: createdUser._id,
@@ -39,9 +39,9 @@ exports.createUser = async (req, res, next) => {
         });
 
     } catch (err) {
-        res.status(400).send({
+        return res.status(400).send({
             status: "error",
-            err: "Failed to Create User.",
+            error: "Failed to Create User.",
         });
     }
 }
@@ -60,13 +60,12 @@ exports.loginUser = async (req, res, next) => {
         if (!user || user.length == 0 || !userPassword) {
             return res.status(401).json({
                 status: "error",
-                message: "Authentication Failed."
+				error: " Wrong Password or Email.",
             });
 		}
 
         return res.status(200).json({
 			status: "success",
-			message: "Authentication Successful.",
 			username: user[0].username,
 			email: user[0].email,
             token,
@@ -75,7 +74,7 @@ exports.loginUser = async (req, res, next) => {
     } catch (err) {
 		return res.status(400).send({
 			status: "error",
-			err: "Authentication Failed.",
+			error: "Authentication Failed."
         });
     }
 }
