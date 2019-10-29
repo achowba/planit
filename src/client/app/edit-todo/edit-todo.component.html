@@ -4,7 +4,7 @@
 				<form class="form-row" #updateTodoForm="ngForm" (submit)="updateTodo(updateTodoForm)">
 					<div class="col-sm-4 mr-3">
 						<div class="was- validated">
-							<label>Todo Ti</label>
+							<label>Title</label>
 							<input type="text" class="form-control" placeholder="Groceries" name="title" value="" minlength="4" required [(ngModel)]="todo.title">
 						</div>
 					</div>

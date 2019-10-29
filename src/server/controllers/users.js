@@ -34,7 +34,7 @@ exports.createUser = async (req, res, next) => {
                 _id: createdUser._id,
                 username: createdUser.username,
                 email: createdUser.email,
-                password: createdUser.password
+                // password: createdUser.password
             }
         });
 

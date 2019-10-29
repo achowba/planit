@@ -35,15 +35,15 @@ const users = [{
 ];
 
 const todos = [{
-	_id: new ObjectID(),
-    title: "First Test Todo",
-	description: "First Test Description",
-	completed: true
+    _id: new ObjectID(),
+    text: 'First test todo',
+    _creator: userOneId
 }, {
-	_id: new ObjectID(),
-    title: "Second Test Todo",
-	description: "Second Test Description",
-	completed: false
+    _id: new ObjectID(),
+    text: 'Second test todo',
+    completed: true,
+    completedAt: 333,
+    _creator: userTwoId
 }];
 
 const populateTodos = (done) => {

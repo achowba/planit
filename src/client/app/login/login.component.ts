@@ -39,7 +39,9 @@ export class LoginComponent implements OnInit {
 			this.auth.setUserDetails(data.token, data.email, data.username);
 			this.username = this.auth.getUserDetails().username;
 			this.router.navigate(['/home']);
-			this.toastr.info(`Hello, ${this.username}`, "Welcome");
+			this.toastr.info(`Hello, ${this.username}`, "Welcome", {
+				timeOut: 2000
+			});
         });
     }
 

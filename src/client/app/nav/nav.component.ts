@@ -33,7 +33,9 @@ export class NavComponent implements OnInit,  AfterContentChecked {
 		if (this.auth.isLoggedIn()) {
 			this.user = this.auth.getUserDetails();
 			if (this.user.username) {
-				this.toastr.info(`Hello, ${this.user.username}`, "Welcome");
+				/* this.toastr.info(`Hello, ${this.user.username}`, "Welcome", {
+					timeOut: 2000
+				}); */
 			}
 		}
 	}

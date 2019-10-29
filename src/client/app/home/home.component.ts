@@ -25,7 +25,9 @@ export class HomeComponent implements OnInit {
 
 	ngOnInit() {
 		if (this.auth.isLoggedIn()) {
+			this.toastr.info("Fetching todos");
 			this.api.get('todos').subscribe((data) => {
+				this.toastr.clear();
 				this.todos = data.todos;
 			});
 		}
