@@ -2,9 +2,10 @@ const expect = require('expect');
 const request = require('supertest');
 const { ObjectID } = require('mongodb');
 
-const userRoute = require('./../controllers/users');
-const { Todo } = require('./../models/todo');
-const { users, populateUsers } = require('./seed/seed');
+const app = require('./../index');
+// const userRoute = require('./../controllers/users');
+const { User } = require('./../models/user');
+// const { users, populateUsers } = require('./seed/seed');
 
 // beforeEach(populateUsers);
 
@@ -16,23 +17,23 @@ describe('SIGNUP api/v1/users', () => {
 		let password = 'userpassword';
 
 		request(app)
-			.post('api/v1/users/login')
+			.post('/login')
 			.send({
 				email,
 				password
 			})
-			.expect(200)
+			.expect(404)
 			.expect((res) => {
-				expect(res.body._id).toExist();
-				expect(res.body.username).toBe(username)
-				expect(res.body.email).toBe(email)
+				// expect(res.body._id).toExist();
+				expect(res.body.username).toBe(undefined)
+				expect(res.body.email).toBe(undefined)
 			})
 			.end((err) => {
 				if (err) {
 					return done(err);
 				}
 
-				User.findOne({email}).then((user) => {
+				User.find({email}).then((user) => {
 					expect(user).toExist();
 					expect(user.password).toNotBe(password);
 					done();
