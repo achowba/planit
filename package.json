@@ -19,7 +19,7 @@
 		"sample": "node src/server/data/seed-db.js",
 		"test-client": "ng test",
 		"test-server": "export NODE_ENV=test || SET \"NODE_ENV=test\" && mocha src/server/tests/server.test.js",
-		"watch:test-server": "nodemon --exec \"npm run test-server\"",
+		"watch-test-server": "nodemon --exec \"npm run test-server\"",
 		"lint": "ng lint"
 	},
 	"private": true,

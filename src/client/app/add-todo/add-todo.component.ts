@@ -35,7 +35,7 @@ export class AddTodoComponent implements OnInit {
 				form.reset();
 				this.toastr.success("Todo Added Successfully", "Added");
 			} else {
-				this.toastr.error("Failed to Add Todo.", "An Error Occured")
+				this.toastr.error("Failed to Add Todo.", "An Error Occured");
 			}
 			// this.router.navigate(['/home']);
 		});

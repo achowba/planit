@@ -33,15 +33,21 @@ export class LoginComponent implements OnInit {
             password: values.password
 		}
 
-        this.api.post('users/login', payload).subscribe((data) => {
-			form.reset();
+		this.toastr.info("Logging In User...", "Please Wait");
 
-			this.auth.setUserDetails(data.token, data.email, data.username);
-			this.username = this.auth.getUserDetails().username;
-			this.router.navigate(['/home']);
-			this.toastr.info(`Hello, ${this.username}`, "Welcome", {
-				timeOut: 2000
-			});
+        this.api.post('users/login', payload).subscribe((data) => {
+			if (data.status == "success") {
+				form.reset();
+				this.auth.setUserDetails(data.token, data.email, data.username);
+				this.username = this.auth.getUserDetails().username;
+				this.router.navigate(['/home']);
+				this.toastr.info(`Hello, ${this.username}`, "Welcome", {
+					timeOut: 2000
+				});
+			} else {
+				this.toastr.error("Failed to Login User. Wrong Email or Password.", "An Error Occured");
+			}
+
         });
     }
 

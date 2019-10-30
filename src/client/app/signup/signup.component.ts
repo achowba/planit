@@ -4,6 +4,7 @@ import { NgForm } from '@angular/forms';
 
 import { ApiService } from '../../services/api.service';
 import { AuthService } from '../../services/auth.service';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
 	selector: 'app-signup',
@@ -13,7 +14,7 @@ import { AuthService } from '../../services/auth.service';
 export class SignupComponent implements OnInit {
 
 	// inject dependencies in the constructor
-	constructor(private api: ApiService, private auth: AuthService, private router: Router) { }
+	constructor(private api: ApiService, private auth: AuthService, private router: Router, private toastr: ToastrService) { }
 
 	ngOnInit() {
 		if (this.auth.isLoggedIn()) {
@@ -32,7 +33,7 @@ export class SignupComponent implements OnInit {
 
 		this.api.post('users/signup', payload).subscribe((data) => {
 			// this.auth.setUserDetails(data.token, data.email);
-			console.log(data);
+			this.toastr.success("Account Created Successfully", "Welcome");
 			form.reset();
 			this.router.navigate(['/login']);
 		});

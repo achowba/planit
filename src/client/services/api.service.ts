@@ -68,7 +68,6 @@ export class ApiService {
 	onRequestError(res: Response) {
 		let statusCode = res.status;
 		let body = res.json();
-
 		let error = {
 			statusCode,
 			error: body.error
@@ -79,6 +78,7 @@ export class ApiService {
 		} else {
 			this.toastr.error(`${body.error}`, "An Error Occured.");
 		}
+
 		return Observable.throw(error);
 	}
 
