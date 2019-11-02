@@ -1,46 +1,102 @@
 const expect = require('expect');
-const request = require('supertest');
-const { ObjectID } = require('mongodb');
+const supertest = require('supertest');
+const mongoose = require('mongoose');
 
 const app = require('./../index');
-// const userRoute = require('./../controllers/users');
-const { User } = require('./../models/user');
-// const { users, populateUsers } = require('./seed/seed');
+const { users, populateUsers } = require('./seed/seed');
 
-// beforeEach(populateUsers);
+before(populateUsers); // populate the database before the tests are ran
 
-describe('SIGNUP api/v1/users', () => {
+describe('SIGNUP api/v1/users/signup', () => {
 
-	it('should create a user', (done) => {
-		let username = 'validusername';
-		let email = 'validuser@test.com';
-		let password = 'userpassword';
+	it('should create a new user', (done) => {
 
-		request(app)
-			.post('/login')
-			.send({
-				email,
-				password
-			})
-			.expect(404)
+		supertest(app)
+			.post('/api/v1/users/signup')
+			.set('Content-Type', 'application/json')
+			.set('Accept', 'application/json')
+			.send(users[0])
 			.expect((res) => {
-				// expect(res.body._id).toExist();
-				expect(res.body.username).toBe(undefined)
-				expect(res.body.email).toBe(undefined)
+				expect(res.body.status).toEqual("success");
+				expect(res.body.createdUser._id).toBeDefined();
+				expect(res.body.createdUser.username).toBe(users[0].username)
+				expect(res.body.createdUser.email).toBe(users[0].email)
 			})
-			.end((err) => {
-				if (err) {
-					return done(err);
-				}
+			.expect(201)
+			.then(function () {
+				done();
+			})
+			.catch(function () {
+				done();
+			});
+	})
 
-				User.find({email}).then((user) => {
-					expect(user).toExist();
-					expect(user.password).toNotBe(password);
-					done();
-				}).catch((e) => {
-					done(e);
-				});
+	it('should expect email to already exist', (done) => {
+		supertest(app)
+			.post('/api/v1/users/signup')
+			.set('Content-Type', 'application/json')
+			.set('Accept', 'application/json')
+			.send(users[1])
+			.expect((res) => {
+				expect(res.body.status).toEqual("error");
+				expect(res.body.error).toBeDefined();
+			})
+			.expect(401)
+			.then(function () {
+				done();
+			})
+			.catch(function () {
+				done();
 			});
 	});
 
 });
+
+describe('Login api/v1/users/login', () => {
+
+	it('should login user if email and password are correct', (done) => {
+		supertest(app)
+			.post('/api/v1/users/login')
+			.set('Content-Type', 'application/json')
+			.set('Accept', 'application/json')
+			.send({
+				email: users[0].email,
+				password: users[0].password,
+			})
+			.expect((res) => {
+				expect(res.body.status).toEqual("success");
+				expect(res.body.token).toBeDefined();
+			})
+			.expect(200)
+			.then(function () {
+				done();
+			})
+			.catch(function () {
+				done();
+			});
+	});
+
+	it('should not login user if password or email is wrong', (done) => {
+		supertest(app)
+			.post('/api/v1/users/login')
+			.set('Content-Type', 'application/json')
+			.set('Accept', 'application/json')
+			.send({
+				email: users[2].email,
+				password: users[2].password,
+			})
+			.expect((res) => {
+				expect(res.body.status).toEqual("error");
+				expect(res.body.error).toBeDefined();
+			})
+			.expect(400)
+			.then(function () {
+				done();
+			})
+			.catch(function () {
+				done();
+			});
+	});
+
+});
+

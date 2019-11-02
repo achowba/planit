@@ -39,6 +39,7 @@ exports.createUser = async (req, res, next) => {
         });
 
     } catch (err) {
+		console.log('There was an error from controller: ', err);
         return res.status(400).send({
             status: "error",
             error: "Failed to Create User.",
@@ -58,9 +59,9 @@ exports.loginUser = async (req, res, next) => {
 		let token = jwtUser(user[0].email, user[0].password);
 
         if (!user || user.length == 0 || !userPassword) {
-            return res.status(401).json({
+            return res.status(400).json({
                 status: "error",
-				error: " Wrong Password or Email.",
+				error: "Wrong Password or Email.",
             });
 		}
 

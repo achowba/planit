@@ -1,17 +1,15 @@
-const http = require('http');
-// const throttle = require("express-throttle-requests");
-
 const app = require('./app');
 
-/* const port = process.env.PORT || 4000;
-const server = http.createServer(app);
+let port = '';
 
-server.listen((port), () => {
-	console.log(`App running on Port: ${port}`);
-}); */
+if (process.env.NODE_ENV == 'test') {
+	port = process.env.TEST_PORT || 3400;
+} else {
+	port = process.env.PORT || 4000;
+}
 
-app.set('port', (process.env.PORT || 4000));
-app.listen( app.get('port'), function() {
+app.set('port', port);
+app.listen(app.get('port'), function() {
 	console.log( `Server is running on Port: ${app.get('port')}`);
 });
 

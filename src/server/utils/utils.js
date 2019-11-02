@@ -1,7 +1,7 @@
 // this was done to prevent the mongoDB object ID from being used in the front end
-function generateQueryId() {
+function generateRandomString(length) {
 	let result = '';
-	for (var i = process.env.QUERY_ID_LENGTH; i > 0; --i) {
+	for (var i = length; i > 0; --i) {
 		result += process.env.QUERY_ID_CHARACTERS[Math.floor(Math.random() * process.env.QUERY_ID_CHARACTERS.length)];
 	}
 
@@ -19,6 +19,6 @@ module.exports = (req, res, next) => {
 }
 
 module.exports = {
-	generateQueryId,
-	checkCurrentUser
+	generateRandomString,
+	// checkCurrentUser
 }

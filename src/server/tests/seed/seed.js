@@ -1,50 +1,39 @@
-const { ObjectID } = require('mongodb');
 const jwt = require('jsonwebtoken');
+const mongoose = require('mongoose');
 
 const { Todo } = require('./../../models/todo');
-const { User } = require('./../../models/user');
-
-const userOneId = new ObjectID();
-const userTwoId = new ObjectID();
+const User = require('./../../models/user');
 
 const users = [{
-    _id: userOneId,
-    email: 'userone@test.com',
-    password: 'userOnePassword',
-    tokens: [{
-        access: 'auth',
-        token: jwt.sign({
-            _id: userOneId,
-            access: 'auth'
-        },
-        process.env.JWT_KEY).toString()
-    }]
+	_id: new mongoose.Types.ObjectId(),
+	username: "Eddard Stark",
+	email: "stark@test.com",
+	password: "userpassword1"
 }, {
-        _id: userTwoId,
-        email: 'usertwo@test.com',
-        password: 'userTwoPassword',
-        tokens: [{
-            access: 'auth',
-            token: jwt.sign({
-                _id: userTwoId,
-                access: 'auth'
-            },
-            process.env.JWT_KEY).toString()
-        }]
-    }
-];
+	_id: new mongoose.Types.ObjectId(),
+	username: "Jon Snow",
+	email: "snow@test.com",
+	password: "userpassword2"
+}, {
+	_id: new mongoose.Types.ObjectId(),
+	username: "Wrong User",
+	email: 'wronguser@test.com',
+	password: 'wrongpassword',
+}];
 
 const todos = [{
-	_id: new ObjectID(),
+	_id: new mongoose.Types.ObjectId(),
     title: "First Test Todo",
 	description: "First Test Description",
 	completed: true
 }, {
-	_id: new ObjectID(),
+	_id: new mongoose.Types.ObjectId(),
     title: "Second Test Todo",
 	description: "Second Test Description",
 	completed: false
 }];
+
+let user1 = new User(users[0]);
 
 const populateTodos = (done) => {
     Todo.remove({}).then(() => {
@@ -55,14 +44,18 @@ const populateTodos = (done) => {
 };
 
 const populateUsers = (done) => {
-    User.remove({}).then(() => {
-        let userOne = new User(users[0]).save();
-        let userTwo = new User(users[1]).save();
+	User.deleteMany({}).then(async () => {
+		try {
+			let userOne = await user1.save();
 
-        return Promise.all([userOne, userTwo]);
-    }).then(() => {
-        done();
-    })
+			if (userOne) {
+				done();
+			}
+
+		} catch (e) {
+			done(e);
+		}
+	})
 };
 
 module.exports = {
