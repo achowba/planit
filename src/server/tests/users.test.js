@@ -1,16 +1,14 @@
 const expect = require('expect');
 const supertest = require('supertest');
-const mongoose = require('mongoose');
 
 const app = require('./../index');
 const { users, populateUsers } = require('./seed/seed');
 
-before(populateUsers); // populate the database before the tests are ran
 
 describe('SIGNUP api/v1/users/signup', () => {
+	before(populateUsers); // populate the database before the tests are ran
 
 	it('should create a new user', (done) => {
-
 		supertest(app)
 			.post('/api/v1/users/signup')
 			.set('Content-Type', 'application/json')
@@ -37,6 +35,25 @@ describe('SIGNUP api/v1/users/signup', () => {
 			.set('Content-Type', 'application/json')
 			.set('Accept', 'application/json')
 			.send(users[1])
+			.expect((res) => {
+				expect(res.body.status).toEqual("error");
+				expect(res.body.error).toBeDefined();
+			})
+			.expect(401)
+			.then(function () {
+				done();
+			})
+			.catch(function () {
+				done();
+			});
+	});
+
+	it('should not create a user if username, email and password are not provided', (done) => {
+		supertest(app)
+			.post('/api/v1/users/signup')
+			.set('Content-Type', 'application/json')
+			.set('Accept', 'application/json')
+			.send({})
 			.expect((res) => {
 				expect(res.body.status).toEqual("error");
 				expect(res.body.error).toBeDefined();

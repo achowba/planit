@@ -48,14 +48,14 @@ const populateUsers = (done) => {
 		try {
 			let userOne = await user1.save();
 
+			done();
 			if (userOne) {
-				done();
 			}
 
 		} catch (e) {
 			done(e);
 		}
-	})
+    })
 };
 
 module.exports = {

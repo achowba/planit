@@ -39,7 +39,7 @@ exports.createUser = async (req, res, next) => {
         });
 
     } catch (err) {
-		console.log('There was an error from controller: ', err);
+		// console.log('There was an error from controller: ', err);
         return res.status(400).send({
             status: "error",
             error: "Failed to Create User.",
