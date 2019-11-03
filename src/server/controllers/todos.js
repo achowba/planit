@@ -133,18 +133,25 @@ exports.updateTodo = async (req, res, next) => {
 			}
         );
 
-		return res.status(200).json({
-			status: "success",
-            updatedTodo: {
-				_id: updatedTodo._id,
-				title: updatedTodo.title,
-				description: updatedTodo.description,
-				completed: updatedTodo.completed,
-				createdOn: updatedTodo.createdOn,
-				createdBy: updatedTodo.createdBy,
-				modifiedOn: updatedTodo.modifiedOn,
-            }
-        });
+		if (updatedTodo) {
+			return res.status(200).json({
+				status: "success",
+				updatedTodo: {
+					_id: updatedTodo._id,
+					title: updatedTodo.title,
+					description: updatedTodo.description,
+					completed: updatedTodo.completed,
+					createdOn: updatedTodo.createdOn,
+					createdBy: updatedTodo.createdBy,
+					modifiedOn: updatedTodo.modifiedOn,
+				}
+			});
+		}
+
+		return res.status(500).json({
+			status: "error",
+			error: "Todo Not Found"
+		});
 
     } catch (err) {
 		return res.status(500).json({
@@ -185,6 +192,7 @@ exports.deleteTodo = async (req, res, next) => {
         });
 
     } catch (err) {
+		console.log(err);
         return res.status(500).json({
             status: "error",
             error: "Failed to Delete Todo"

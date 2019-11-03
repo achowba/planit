@@ -18,7 +18,7 @@
 		"watch": "run-p watch:*",
 		"sample": "node src/server/data/seed-db.js",
 		"test-client": "ng test",
-		"test-server": "export NODE_ENV=test || SET \"NODE_ENV=test\" && mocha src/server/tests/server.test.js",
+		"test-server": "export NODE_ENV=test || SET \"NODE_ENV=test\" && mocha src/server/tests/server.test.js --timeout 10000",
 		"watch-test-server": "nodemon --exec \"npm run test-server\"",
 		"lint": "ng lint"
 	},

@@ -56,7 +56,7 @@ exports.loginUser = async (req, res, next) => {
 	try {
 		let user = await User.find({email,});
 		let userPassword = await comparePassword(password, user[0].password);
-		let token = jwtUser(user[0].email, user[0].password);
+		let token = jwtUser(user[0].email, user[0]._id);
 
         if (!user || user.length == 0 || !userPassword) {
             return res.status(400).json({
